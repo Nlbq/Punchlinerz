@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crée ta punch' narvalo{% endblock %}
+
+{% block body %} 
+
+<h1 class="text-center">Ajouter une punch' de botch</h1>
+
+{{ form_start(form) }}
+
+{{ form_widget(form) }}
+
+<button type="submit" class="btn btn-primary">Valider</button>
+
+{{ form_end(form) }}
+
+
+{% endblock %} 

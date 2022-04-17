@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wééé{% endblock %}
+
+{% block body %} 
+
+<div class="punchView">
+    <div class="row">
+        <h1 class="text-white">{{punch.theme}}</h1>
+        <p class="text-white">{{punch.content}}</p>
+        <small class="text-white">{{punch.date|date("d/m/Y")}}</small>
+    </div>
+
+    <a href="{{ path('punchs_index') }}" class="btn btn-primary m-3">Retour</a>
+
+</div>
+
+
+
+{% endblock %} 
