@@ -54,7 +54,38 @@ class PunchController extends AbstractController
         return $this->render('punch/new.html.twig', [
             'form' => $form->createView()
         ]);
+    }
 
+    /**
+     * Permet d'afficher le formulaire d'edition
+     * 
+     * @Route("/punchs/{id}/edit", name="punchs_edit")
+     *
+     * @return Response
+     */
+    public function edit(Punch $punch, Request $request, EntityManagerInterface $manager){
+
+        $form = $this->createForm(PunchType::class, $punch);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($punch);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Les modifications de la punch' ont bien été enregistrées"
+            );
+
+            return $this->redirectToRoute('punchs_show', [
+                'id' => $punch->getId()
+            ]);
+        }
+
+        return $this->render('punch/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
