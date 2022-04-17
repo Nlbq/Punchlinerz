@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Punch::class, mappedBy="author")
+     */
+    private $punches;
+
+    public function __construct()
+    {
+        $this->punches = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -117,5 +129,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Punch>
+     */
+    public function getPunches(): Collection
+    {
+        return $this->punches;
+    }
+
+    public function addPunch(Punch $punch): self
+    {
+        if (!$this->punches->contains($punch)) {
+            $this->punches[] = $punch;
+            $punch->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePunch(Punch $punch): self
+    {
+        if ($this->punches->removeElement($punch)) {
+            // set the owning side to null (unless already changed)
+            if ($punch->getAuthor() === $this) {
+                $punch->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }

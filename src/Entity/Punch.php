@@ -40,6 +40,12 @@ class Punch
      */
     private $date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="punches")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +84,18 @@ class Punch
     public function setDate(?\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
