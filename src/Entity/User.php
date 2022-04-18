@@ -2,15 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ * fields={"username"},
+ * message="Ce nom d'utilisateur est déjà pris, t'es pas original mon pote"
+ * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -23,6 +30,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * 
      */
     private $username;
 
@@ -91,6 +100,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setRoles(array $roles): self
     {
+        $roles[] = 'ROLE_USER';
         $this->roles = $roles;
 
         return $this;
