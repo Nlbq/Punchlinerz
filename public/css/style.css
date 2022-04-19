@@ -4,5 +4,22 @@
     font-family: 'Roboto', sans-serif;
 }
 body{
-    background: #272b30;
+    /* background: linear-gradient(#bdc3c7, #2c3e50); */
+    /* background: #eaf1f1; */
+    background: linear-gradient(-45deg, #033f3c, #090427, #2b2a2e, #000000);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

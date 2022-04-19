@@ -11,6 +11,10 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\component\Validator\Constraints as Assert;
+
 
 class RegistrationType extends ApplicationType
 {
@@ -21,6 +25,7 @@ class RegistrationType extends ApplicationType
         $builder
             ->add('username', TextType::class, $this->getConfiguration("Nom d'utilisateur", " Entrez votre nom d'utilisateur ..."))
             ->add('password', PasswordType::class,$this->getConfiguration("Mot de passe", "Entrez votre mot de passe"))
+
         ;
     }
 

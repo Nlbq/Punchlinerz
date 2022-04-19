@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du profil utilisateur{% endblock %}
+
+{% block body %}
+
+<div class="container col-8 border rounded bg-primary p-4 mt-5">
+    <h1 class="text-center pb-3 m-4 text-white" >Modifier mon profil</h1>
+
+    <div class=" form mb-5 align-items-center ">
+    {{ form_start(form) }}
+    <div class="form-group col-10 mx-auto text-dark border rounded bg-light p-4">
+    {{ form_widget(form) }}
+    
+    <div class="row justify-content-center">
+        <button type="submit" class="btn btn-success col-2 mt-3 mb-2">Valider</button>
+    </div>
+    </div>
+    {{ form_end(form) }}
+    </div>
+</div>
+
+{% endblock %}

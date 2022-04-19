@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Schema\Constraint;
+use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -47,9 +49,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
+     *
+     */
+    public $passwordConfirm;
+
+    /**
      * @ORM\OneToMany(targetEntity=Punch::class, mappedBy="author")
      */
     private $punches;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
 
     public function __construct()
     {
@@ -121,6 +133,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    // public function getPasswordConfirm(){
+    //     return $this->passwordConfirm;
+    // }
+
+    // public function setPasswordConfirm($passwordConfirm){
+    //     $this->passwordConfirm = $passwordConfirm;
+
+    //     return $this;
+    // }
+
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
@@ -167,6 +189,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $punch->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

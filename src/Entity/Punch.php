@@ -42,7 +42,7 @@ class Punch
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="punches")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $author;
 

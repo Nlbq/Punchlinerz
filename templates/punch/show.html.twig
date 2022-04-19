@@ -4,17 +4,27 @@
 
 {% block body %} 
 
-<div class="punchView">
-    <div class="row">
-        <h1 class="text-white">{{punch.theme}}</h1>
-        <p class="text-white">{{punch.content}}</p>
-        <small class="text-white">{{punch.date|date("d/m/Y")}}</small>
+<div class="punchView mt-5 ">
+    <div class="row text-center justify-content-center">
+        <div class="col-8 border m-2">
+            <h1 class="text-white">{{punch.theme}}</h1>
+            <p class="text-white">{{punch.content}}</p>
+            <small class="text-white">{{punch.date|date("d/m/Y")}}</small>
+            <a href="{{ path('punchs_index') }}" class="btn btn-primary m-3">Retour</a>
+        </div>
     </div>
 
-    <a href="{{ path('punchs_index') }}" class="btn btn-primary m-3">Retour</a>
+    <div class="row text-center justify-content-center">
 
+        <div class="col-8 border m-2 text-white">
+    {# <div class="row mb-3 align-items-center"> #}
+        {# <div class="col-4">
+            <img src="" alt="">
+        </div>  #}
+            <h3>{{punch.author.username}}</h3>
+            <span class=""> Nombre de punchs: {{punch.author.punches | length}}</span>
+            <p>Description: {{punch.author.description}}</p>
+        </div>
 </div>
-
-
 
 {% endblock %} 

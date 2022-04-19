@@ -32,6 +32,7 @@ class PunchController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $manager){
         $punch = new Punch();
+        // $punch->setAuthor($user->getUsername());
 
         $form = $this->createForm(PunchType::class, $punch);
 

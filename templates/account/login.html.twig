@@ -3,11 +3,13 @@
 {% block title %}Connexion au site{% endblock %}
 
 {% block body %}
-<div class="container  border rounded m-5 p-5">
-    <div class="row col-12">
-        <div class="col-md-3">&nbsp;</div>
-        <div class="col-md-6">
-            <div class="bg-light p-3 border rounded">
+
+
+<div class="container bg-dark mx-auto m-5 p-5">
+    <div class="row col-12 justify-content-center">
+        {# <div class="col-md-3">&nbsp;</div> #}
+        <div class="col-md-8">
+            <div class="col-12 bg-light p-3 border rounded">
                 <h1 class="text-success m-4 pb-3 text-center">Connectez-vous!</h1>
 
                 {% if hasError %}
@@ -15,16 +17,16 @@
                 {% endif %}
 
                 <form action="{{ path('account_login') }}" method="post">
-                    <div class="form-group">
-                        <label for="username">Nom d'utilisateur</label>
-                        <input type="text" name="_username" id="" class="form-control" id="username" placeholder="Renseigne ton blase jeune entrepreneur ..." required value="{{username}}">
+                    <div class="form-group text-success ">
+                        <label for="username" class="pb-2">Nom d'utilisateur</label>
+                        <input type="text" name="_username" id="" class="form-control mb-4" id="username" placeholder="Renseigne ton blase jeune entrepreneur ..." required value="{{username}}">
                     </div>
-                    <div class="form-group">
-                        <label for="password">Mot de passe</label>
+                    <div class="form-group text-success">
+                        <label for="password" class="pb-2">Mot de passe</label>
                         <input type="password" name="_password" id="" class="form-control" id="password" placeholder="Renseigne ton mdp fdp ..." required>
                     </div>
                     <div class="form-group text-center">
-                    <button type="submit" class="btn btn-success m-3 p-2">Connexion</button>
+                    <button type="submit" class="btn btn-success mt-4 mb-2 p-2 border-light">Connexion</button>
                     </div>
                 </form>
             </div>
