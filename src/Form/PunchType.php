@@ -21,7 +21,7 @@ class PunchType extends ApplicationType
         $builder
             ->add('theme', TextType::class, $this->getConfiguration("Thème", "Renseigne le thème narvalo"))
             ->add('content', TextareaType::class, $this->getConfiguration("Punchline", "Partage ton inspi ... fais deuspi"))
-            ->add('author', TextType::class, $this->getConfiguration("Auteur", "Auteur de la punch"))
+            // ->add('author', TextType::class, $this->getConfiguration("Auteur", "Auteur de la punch"))
             ->add('date', DateType::class)
         ;
     }

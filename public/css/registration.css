@@ -1,0 +1,158 @@
+
+
+.title-register p {
+    margin-top: 5% !important;
+    font-size: 38px;
+}
+.login-form-logo img{
+    /* padding: 10px !important; */
+    border: solid 2px #68c668;
+    border-radius: 50%;
+}
+
+.container{
+    margin-top: 3% !important;
+    box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #f9f9f9;
+    border-radius: 10px;
+    background-color: #81888e;
+}
+
+.login-form-logo{
+    padding-top: 5% !important;
+}
+
+/* .email-input,
+.password-input{
+    background-color: #f7fafd;
+    border-radius: 8px;
+    border: none;
+    box-shadow: inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #f9f9f9;
+} */
+
+/* .email-input:focus,
+.password-input:focus{
+    box-shadow: inset 2px 2px 4px #d1d9e6, inset -4px -4px 4px #f9f9f9;
+} */
+
+
+@media screen and (max-width: 450px){
+    .login-logo img{
+        height: 30px !important;
+    }
+
+    .login-logo{
+        margin: 12% !important;
+    }
+
+    .login-form-logo{
+        font-size: 8px !important;
+        padding-bottom: 3% !important;
+    }
+
+    .login-form{
+        padding: 5% !important;
+    }
+
+    .email-input,
+    .password-input{
+        font-size: 12px;
+        padding: 5px 10px !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(0.7);
+    }
+
+    .form-check-label,
+    .forget-password{
+        font-size: 12px;
+    }
+
+    .connexion-btn{
+        font-size: 12px;
+    }
+}
+
+ 
+
+/* .login-form{
+    margin-top: 5% !important;
+    border: solid 3px ;
+    background: linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(90deg,#3595e1,#7c4aac) border-box;
+    border-color: transparent;
+    border-radius: 8px;
+}
+
+.title-email,
+.title-password{
+    font-size: 20px;
+    border-bottom: solid 2px ;
+    background: linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(90deg,#3595e1,#7c4aac) border-box;
+    border-color: transparent;
+    border-radius: 2px;
+}
+
+.email-input,
+.password-input{
+    border: 0;
+    box-shadow: none;
+    border: solid 1px;
+    background: linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(90deg,#3595e1,#7c4aac) border-box;
+    border-color: transparent;
+    border-radius: 5px;
+}
+
+.form-check-input{
+    cursor: pointer;
+}
+
+.form-check-label{
+    font-size: 16px;
+}
+
+.form-check-label:hover{
+    cursor: pointer;
+    color: #3595e1;
+}
+
+.forget-password{
+    text-decoration: none;
+    color: unset;
+    font-size: 16px;
+}
+.forget-password:hover{
+    color: #3595e1;
+}
+
+.connexion-btn{
+    background-image: linear-gradient(90deg,#3595e1,#7c4aac) !important;
+}
+
+.connexion-btn:hover{
+    font-weight: 600;
+}
+
+@media screen and (max-width: 450px){
+    .login-logo img{
+        height: 30px;
+    }
+    .form-group label{
+        font-size: 14px;
+    }
+    .form-group input{
+        font-size: 10px;
+    }
+    .login-form{
+        padding: 10px !important;
+    }
+    .form-check-label,
+    .forget-password{
+        font-size: 12px;
+    }
+    .connexion-btn{
+        font-size: 14px;
+    }
+} */

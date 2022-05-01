@@ -65,6 +65,8 @@ class AccountController extends AbstractController
             $user->setRoles([]);
             $password = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
+            $picture="https://picsum.photos/80";
+            $user->setPicture($picture);
 
             $manager->persist($user);
             $manager->flush();
@@ -84,7 +86,7 @@ class AccountController extends AbstractController
     /**
      * Formulaire de modification du profil
      * 
-     * @Route("/account/profile", name="account-profile")
+     * @Route("/account/profile", name="account_profile")
      *
      * @return Response
      */
@@ -104,10 +106,23 @@ class AccountController extends AbstractController
                 "Ton profil a bien été modifié"
             );
 
+        }
         return $this->render('account/profile.html.twig', [
             'form' => $form->createView()
         ]);
-        }
+    }
+
+    /**
+     * Afficher le profil de l'utilisateur connecté
+     * 
+     * @Route("/account", name="account_index")
+     *
+     * @return Response
+     */
+    public function myAccount(){
+        return $this->render('user/index.html.twig', [
+            'user' =>$this->getUser()
+        ]);
     }
 
     /**
@@ -118,55 +133,57 @@ class AccountController extends AbstractController
      * @param AuthenticationUtils $utils
      * @return Response
      */
-//     public function updatePassword(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHasher, ValidatorInterface $validator): Response
-//     {
-//         $passwordUpdate = new PasswordUpdate();
 
-//         $user = $this->getUser();
+
+    public function updatePassword(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHasher, ValidatorInterface $validator): Response
+    {
+        $passwordUpdate = new PasswordUpdate();
+
+        $user = $this->getUser();
 
         
 
-//         $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+        $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
 
-//         $form->handleRequest($request);
+        $form->handleRequest($request);
 
-//         $errors = $validator->validate($user);
+        $errors = $validator->validate($user);
 
-//         if (count($errors) > 0) {
-//             /*
-//              * Uses a __toString method on the $errors variable which is a
-//              * ConstraintViolationList object. This gives us a nice string
-//              * for debugging.
-//              */
-//             $errorsString = (string) $errors;
+        if (count($errors) > 0) {
+            /*
+             * Uses a __toString method on the $errors variable which is a
+             * ConstraintViolationList object. This gives us a nice string
+             * for debugging.
+             */
+            $errorsString = (string) $errors;
 
-//             return new Response($errorsString);
-//     }
+            return new Response($errorsString);
+    }
 
-//         if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()){
 
-//             if(password_verify($passwordUpdate->getOldPassword(), $user->getPassword())){
+            if(password_verify($passwordUpdate->getOldPassword(), $user->getPassword())){
     
-//             }else{
-//                 $newPassword = $passwordUpdate->getNewPassword();
-//                 $password = $passwordHasher->hashPassword($user, $newPassword);
+            }else{
+                $newPassword = $passwordUpdate->getNewPassword();
+                $password = $passwordHasher->hashPassword($user, $newPassword);
 
-//                 $user->setPassword($password);
-//                 $manager->persist($user);
-//                 $manager->flush();
+                $user->setPassword($password);
+                $manager->persist($user);
+                $manager->flush();
 
-//                 $this->addFlash(
-//                     'success',
-//                     "Ton mot de passe a bien été modifié"
-//                 );
+                $this->addFlash(
+                    'success',
+                    "Ton mot de passe a bien été modifié"
+                );
 
-//                 return $this->redirectToRoute(('home'));
-//             }
+                return $this->redirectToRoute(('home'));
+            }
 
-//         }
+        }
    
-//         return $this->render('account/password.html.twig', [
-//             'form'=> $form->createView()
-//         ]);
-// }
+        return $this->render('account/password.html.twig', [
+            'form'=> $form->createView()
+        ]);
+}
 }

@@ -1,4 +1,3 @@
-.punch-cards a{
-    text-decoration: none;
-    /* color: #fff; */
+.show_punch_btn:hover{
+    cursor: pointer;
 }

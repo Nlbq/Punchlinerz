@@ -3,16 +3,17 @@
 {% block title %}Crée ta punch' narvalo{% endblock %}
 
 {% block body %} 
-
-<div class="create_form_container">
-
     <h1 class="text-center">Ajouter une punch' de botch</h1>
+
+<div class="create_form_container container p-3">
+
 
     {{ form_start(form) }}
 
     {{ form_widget(form) }}
-
-    <button type="submit" class="btn btn-primary">Valider</button>
+    <div class="btn-new-form text-center">
+        <button type="submit" class="btn btn-primary ">Valider</button>
+    </div>  
 
     {{ form_end(form) }}
 

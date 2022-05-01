@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Punch;
+use App\Entity\User;
+
 use App\Form\PunchType;
 use App\Repository\PunchRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,13 +34,15 @@ class PunchController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $manager){
         $punch = new Punch();
-        // $punch->setAuthor($user->getUsername());
 
         $form = $this->createForm(PunchType::class, $punch);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            $punch->setAuthor($this->getUser());
+
             $manager->persist($punch);
             $manager->flush();
 

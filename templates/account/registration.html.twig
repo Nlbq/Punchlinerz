@@ -2,20 +2,27 @@
 
 {% block title %}Inscription au site{% endblock %}
 
+
 {% block body %}
 
-<div class="container col-8 border rounded bg-primary p-4 mt-5">
-    <h1 class="text-center pb-3 m-4 text-white" >Inscrivez vous sur le site !</h1>
+<div class="title-register">
+<p class="text-center text-primary mt-3">Inscription</p>
+</div>
 
-    <div class=" form mb-5 align-items-center ">
+<div class="container text-white col-10 col-sm-8 col-md-8 col-lg-6 col-xl-4 register-container">
+    <div class="login-form-logo text-center">
+        <img src="{{ asset('/build/images/Punch-bg.236485bf.png') }}" class="logo-img p-2" alt="logo" width="70" height="70"/>
+        {# <img src="{{ asset('/build/images/punch.svg') }}" class="logo-img p-2" alt="logo" width="70" height="70" style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%)"/> #}
+
+    </div>
+
+    <div class="col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 mx-auto login-form">
     {{ form_start(form) }}
-    <div class="form-group col-10 mx-auto text-dark border rounded bg-light p-4">
+    <div class="form-group  mt-1">
     {{ form_widget(form) }}
     
-
-    
-    <div class="row justify-content-center">
-        <button type="submit" class="btn btn-success col-2 mt-3 mb-2">Valider</button>
+    <div class="col text-center">
+        <button type="submit" class="btn btn-dark col-md-6 col-lg-6 mt-1 mb-4 connexion-btn">Valider</button>
     </div>
     </div>
     {{ form_end(form) }}
