@@ -68,10 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $picture;
 
-    public function __construct()
-    {
-        $this->punches = new ArrayCollection();
-    }
+   
 
     public function getId(): ?int
     {
@@ -221,4 +218,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    
 }

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -87,6 +88,7 @@ class AccountController extends AbstractController
      * Formulaire de modification du profil
      * 
      * @Route("/account/profile", name="account_profile")
+     * @IsGranted("ROLE_USER")
      *
      * @return Response
      */
@@ -116,6 +118,7 @@ class AccountController extends AbstractController
      * Afficher le profil de l'utilisateur connecté
      * 
      * @Route("/account", name="account_index")
+     * @IsGranted("ROLE_USER")
      *
      * @return Response
      */
@@ -129,6 +132,7 @@ class AccountController extends AbstractController
      * Afficher formulaire de connexion
      * 
      * @Route("/account/password-update", name="account_password")
+     * @IsGranted("ROLE_USER")
      *
      * @param AuthenticationUtils $utils
      * @return Response

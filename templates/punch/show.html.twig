@@ -7,23 +7,27 @@
 
 {% block body %} 
 
-<div class="punchView mt-5 ">
-    <div class="row col-12 text-center justify-content-center">
-        <div class="col-8 border m-2">
-            <h1 class="text-dark">{{punch.theme}}</h1>
-            <p class="text-dark">{{punch.content}}</p>
+<div class="punchView text-white mt-5 ">
+    <div class="row  col-12 text-center justify-content-center">
+        <div class="col-8 border rounded bg-primary m-2">
+            <h1 class="">{{punch.theme}}</h1>
+            <p class="">{{punch.content}}</p>
             <small class="textdarke">{{punch.date|date("d/m/Y")}}</small>
-            <a href="{{ path('punchs_index') }}" class="btn btn-primary m-3">Retour</a>
+            <a href="{{ path('punchs_index') }}" class="btn btn-secondary m-3">Retour</a>
+
+            {% if app.user and app.user == punch.author %}
+            <a href="{{ path('punchs_edit', {'id': punch.id}) }}" class="btn btn-warning m-3">Modifier</a>
+
+            <a href="{{ path('punchs_delete', {'id': punch.id}) }}" class="btn btn-danger m-3" onclick="return confirm(`Tu veux vraiment supprimer cette punch bien fatch?`)">Supprimer</a>
+
+            {% endif %}
         </div>
     </div>
 
     <div class="row col-12 text-center justify-content-center">
         {% set p = punch.author %}
-        <div class="col-8 border m-2 text-dark">
-    {# <div class="row mb-3 align-items-center"> #}
-        {# <div class="col-4">
-            <img src="" alt="">
-        </div>  #}
+        <div class="col-8 bg-secondary border m-2 text-white">
+
     <div class="img">
         <a href="{{ path('user_show', {'id': p.id})}}">
             <img src="{{p.picture}}" class="avatar avatar-medium m-3" alt="Avatar de la personne">

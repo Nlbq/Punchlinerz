@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Punch;
 use App\Entity\User;
+use App\Entity\Punch;
 
 use App\Form\PunchType;
 use App\Repository\PunchRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\ORM\EntityManagerInterface;
 
 class PunchController extends AbstractController
 {
@@ -29,6 +31,7 @@ class PunchController extends AbstractController
     /**
      * Créer une punch
      * @Route("/punchs/new", name="punchs_create")
+     * @IsGranted("ROLE_USER")
      *
      * @return Response
      */
@@ -65,6 +68,7 @@ class PunchController extends AbstractController
      * Permet d'afficher le formulaire d'edition
      * 
      * @Route("/punchs/{id}/edit", name="punchs_edit")
+     * @Security("is_granted('ROLE_USER') and user === punch.getAuthor()", message="C'est pas ta punch, tu peux pas la modifier narvalo")
      *
      * @return Response
      */
@@ -100,6 +104,28 @@ class PunchController extends AbstractController
         return $this->render('punch/show.html.twig', [
             'punch' => $punch
         ]);
+    }
+
+    /**
+     * Supprimer une annonce
+     * 
+     * @Route("/punchs/{id}/delete", name="punchs_delete")
+     * @Security("is_granted('ROLE_USER') and user == punch.getAuthor()", message="Touche à ton cul, tu vas rien supprimer")
+     *
+     * @param Punch $punch
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function delete(Punch $punch, EntityManagerInterface $manager) {
+        $manager->remove($punch);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "La punch a bien été supprimée, et c'est pas du luxe"
+        );
+
+        return $this->redirectToRoute("punchs_index");
     }
 
 }
