@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page non trouvée{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center text-white p-3">Tu t'es duper frérot, cette page n'existe pas</h1>
+
+    </div>
+    <div class="row col-12 justify-content-center">
+    <div class="col-6 text-center m-3">
+  
+    <a href="{{ path('homepage')}}" class="btn btn-primary mx-2">Retour à l'accueil</a>
+
+
+    <a href="{{ path('punchs_index')}}" class="btn btn-primary">Retour aux punchs</a>
+</div>
+    </div>
+
+{% endblock %}

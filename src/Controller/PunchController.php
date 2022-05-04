@@ -68,7 +68,7 @@ class PunchController extends AbstractController
      * Permet d'afficher le formulaire d'edition
      * 
      * @Route("/punchs/{id}/edit", name="punchs_edit")
-     * @Security("is_granted('ROLE_USER') and user === punch.getAuthor()", message="C'est pas ta punch, tu peux pas la modifier narvalo")
+     * @Security("is_granted('ROLE_USER') and user === punch.getAuthor()")
      *
      * @return Response
      */
@@ -110,7 +110,7 @@ class PunchController extends AbstractController
      * Supprimer une annonce
      * 
      * @Route("/punchs/{id}/delete", name="punchs_delete")
-     * @Security("is_granted('ROLE_USER') and user == punch.getAuthor()", message="Touche à ton cul, tu vas rien supprimer")
+     * @Security("is_granted('ROLE_USER') and user == punch.getAuthor()")
      *
      * @param Punch $punch
      * @param EntityManagerInterface $manager

@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\PunchRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PunchRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(
  * fields={"content", "id"},
  * message="Cette punch' existe déjà, plagieur que tié"
@@ -45,6 +48,29 @@ class Punch
      * @ORM\JoinColumn(nullable=true)
      */
     private $author;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="punch", orphanRemoval=true)
+     */
+    private $comments;
+
+    /**
+     * Permet de mettre en place la date de création
+     * 
+     * @ORM\PrePersist
+     *
+     * @return void
+     */
+    public function prePersist(){
+        if(empty($this->date)){
+            $this->date = new \DateTime();
+        }
+    }
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -98,6 +124,47 @@ class Punch
         $this->author = $author;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPunch($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getPunch() === $this) {
+                $comment->setPunch(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAvgRatings(){
+        //Calculer la somme des notations
+        $sum = array_reduce($this->comments->toArray(), function($total, $comment){
+            return $total + $comment->getRating();
+        }, 0);
+        //Faire la division pour avoir la moyenne
+        if(count($this->comments) > 0) return $sum / count($this->comments);
+
+        return 0;
     }
 
 }

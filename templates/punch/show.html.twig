@@ -8,10 +8,10 @@
 {% block body %} 
 
 <div class="punchView text-white mt-5 ">
-    <div class="row  col-12 text-center justify-content-center">
+    <div class="row col-12 text-center justify-content-center">
         <div class="col-8 border rounded bg-primary m-2">
-            <h1 class="">{{punch.theme}}</h1>
-            <p class="">{{punch.content}}</p>
+            <h1 class="">{{punch.theme|capitalize}}</h1>
+            <p class="">{{punch.content|capitalize}}</p>
             <small class="textdarke">{{punch.date|date("d/m/Y")}}</small>
             <a href="{{ path('punchs_index') }}" class="btn btn-secondary m-3">Retour</a>
 
@@ -22,6 +22,38 @@
 
             {% endif %}
         </div>
+
+        {% if punch.comments|length > 0 %}
+            <h2 class="mb-3">Commentaire des punchlinerz :</h2>
+
+            <div class="alert alert-info">
+              <h4 class="alert-heading">
+              <div class="row col-12 align-items-center">
+              <div class="col">
+                Note globale des punchlinerz 
+              </div>
+              <div class="col">
+                {% include 'partials/rating.html.twig' with {'rating': punch.avgRatings} %}
+                <br>
+                <small>(Calculée sur {{punch.comments|length}} punchlinerz)</small>
+              </div>
+              </div>
+              </h4>
+            </div>
+
+            {% for comment in punch.comments %}
+                <div class=" col-10 bg-secondary rounded mb-3 py-3 px-3">
+                    <strong>{{comment.author.username|capitalize}}</strong> :
+                    <blockquote>
+                        {{comment.content|capitalize}}
+                    </blockquote>
+                    <strong>Note de {{comment.author.username|capitalize}} :</strong>
+                    {% include 'partials/rating.html.twig' with {'rating': comment.rating} %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2>Cette punch n'a pas encore été commenté...</h2>
+        {% endif %}
     </div>
 
     <div class="row col-12 text-center justify-content-center">

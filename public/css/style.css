@@ -23,6 +23,9 @@ body{
     right: 0; 
     left: auto; 
 }
+span.rating i{
+    color: goldenrod;
+}
 
 /* @keyframes gradient {
     0% {
