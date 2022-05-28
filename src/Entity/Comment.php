@@ -19,7 +19,7 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -35,13 +35,13 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=Punch::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $punch;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $author;
 

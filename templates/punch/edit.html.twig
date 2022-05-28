@@ -2,20 +2,25 @@
 
 {% block title %}Editer la punch'{% endblock %}
 
+{% block stylesheets %}
+        <link rel="stylesheet" href="/css/punchline_edit.css">
+{% endblock %}
+
 {% block body %} 
-
-<div class="edit_form_container">
-
-    <h1 class="text-center">Modifie ta punch'</h1>
+<div class="row col-12 edit-container justify-content-center">
+    <h1 class="text-center my-4">Modifie ta punch'</h1>
+<div class="row col-8 my-5 edit_form_container p-5">
 
     {{ form_start(form) }}
 
     {{ form_widget(form) }}
 
-    <button type="submit" class="btn btn-primary">Valider</button>
-
+    <div class="text-center mb-3 pt-3">
+        <button type="submit" class="btn btn-success col-2">Valider</button>
+    </div>
     {{ form_end(form) }}
 
+</div>
 </div>
 
 

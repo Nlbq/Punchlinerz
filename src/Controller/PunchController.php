@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Punch;
 
+use App\Entity\Comment;
 use App\Form\PunchType;
+use App\Form\CommentType;
 use App\Repository\PunchRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -100,9 +102,29 @@ class PunchController extends AbstractController
     /**
      * @Route("/punchs/{id}", name="punchs_show")
      */
-    public function show(Punch $punch){
+    public function show(Punch $punch, Request $request, EntityManagerInterface $manager){
+
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $comment->setPunch($punch)
+                    ->setAuthor($this->getUser());
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Ton commentaire a bien été enregistré"
+            );
+        }
+
         return $this->render('punch/show.html.twig', [
-            'punch' => $punch
+            'punch' => $punch,
+            'form'  => $form->createView()
         ]);
     }
 

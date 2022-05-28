@@ -2,22 +2,26 @@
 
 {% block title %}Crée ta punch' narvalo{% endblock %}
 
+{% block stylesheets %}
+        <link rel="stylesheet" href="/css/punchline_add.css">
+{% endblock %}
+
 {% block body %} 
-    <h1 class="text-center">Ajouter une punch' de botch</h1>
+    <h1 class="text-center mt-5 mb-3">Ajouter une punch' de botch</h1>
 
-<div class="create_form_container container p-3">
-
+<div class="row col-12 create-container justify-content-center">
+<div class="col-8 create_form_container my-5 p-5">
 
     {{ form_start(form) }}
 
     {{ form_widget(form) }}
-    <div class="btn-new-form text-center">
-        <button type="submit" class="btn btn-primary ">Valider</button>
+    <div class="btn-new-form text-center mb-2 pt-4">
+        <button type="submit" class="btn btn-success col-2 ">Valider</button>
     </div>  
 
     {{ form_end(form) }}
 
 </div>
-
+</div>
 
 {% endblock %} 

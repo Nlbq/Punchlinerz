@@ -6,10 +6,14 @@
 {% block body %}
 
 <div class="title-register">
-<p class="text-center text-primary mt-3">Inscription</p>
+<p class="text-center text-white mt-3">Inscription</p>
 </div>
 
-<div class="container text-white col-10 col-sm-8 col-md-8 col-lg-6 col-xl-4 register-container">
+{% block stylesheets %}
+        <link rel="stylesheet" href="/css/registration.css">
+{% endblock %}
+
+<div class="container col-10 col-sm-8 col-md-8 col-lg-6 col-xl-4 register-container my-5">
     <div class="login-form-logo text-center">
         <img src="{{ asset('/build/images/Punch-bg.236485bf.png') }}" class="logo-img p-2" alt="logo" width="70" height="70"/>
         {# <img src="{{ asset('/build/images/punch.svg') }}" class="logo-img p-2" alt="logo" width="70" height="70" style="filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%)"/> #}
@@ -22,7 +26,7 @@
     {{ form_widget(form) }}
     
     <div class="col text-center">
-        <button type="submit" class="btn btn-dark col-md-6 col-lg-6 mt-1 mb-4 connexion-btn">Valider</button>
+        <button type="submit" class="btn btn-success col-md-6 col-lg-6 mt-4 mb-5 connexion-btn">Valider</button>
     </div>
     </div>
     {{ form_end(form) }}

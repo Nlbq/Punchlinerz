@@ -51,10 +51,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      *
      */
-    public $passwordConfirm;
+    // public $passwordConfirm;
 
     /**
      * @ORM\OneToMany(targetEntity=Punch::class, mappedBy="author")
+     * 
      */
     private $punches;
 

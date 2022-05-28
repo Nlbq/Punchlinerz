@@ -7,70 +7,101 @@
 
 {% block body %} 
 
-<div class="punchView text-white mt-5 ">
-    <div class="row col-12 text-center justify-content-center">
-        <div class="col-8 border rounded bg-primary m-2">
-            <h1 class="">{{punch.theme|capitalize}}</h1>
-            <p class="">{{punch.content|capitalize}}</p>
-            <small class="textdarke">{{punch.date|date("d/m/Y")}}</small>
-            <a href="{{ path('punchs_index') }}" class="btn btn-secondary m-3">Retour</a>
+<div class="punchView row col-12 text-white mt-5 mb-5">
+    <div class="row col-3 text-center justify-content-center">
+        {% set p = punch.author %}
+        <div class="col-8 user-card m-2 text-white">
+
+        <div class="img">
+            <a href="{{ path('user_show', {'id': p.id})}}">
+                <img src="{{p.picture}}" class="avatar avatar-medium mt-5 mb-2" alt="Avatar de la personne">
+            </a>
+        </div>
+            <a href="{{ path('user_show', {'id': p.id})}}">
+                <h3 class="my-3">{{p.username | capitalize}}</h3>
+            </a>
+            <span class="py-3"> Nombre de punchs: {{p.punches | length}}</span>
+            <p class="py-3">Description: {{p.description}}</p>
+        </div>
+    </div>
+
+    <div class="row col-9 text-center justify-content-center">
+        <h1 class="text-white">La punch :</h1>
+        <div class="col-10 punch-card m-2 p-3">
+            <h4 class="my-3 text-success">{{punch.theme|capitalize}}</h4>
+            <p class="punch-content my-3">{{punch.content|capitalize}}</p>
+            
+            <a href="{{ path('punchs_index') }}" class="btn btn-secondary m-1 p-2 mb-2">Retour</a>
 
             {% if app.user and app.user == punch.author %}
-            <a href="{{ path('punchs_edit', {'id': punch.id}) }}" class="btn btn-warning m-3">Modifier</a>
+            <a href="{{ path('punchs_edit', {'id': punch.id}) }}" class="btn btn-warning m-1 p-2 mb-2">Modifier</a>
 
-            <a href="{{ path('punchs_delete', {'id': punch.id}) }}" class="btn btn-danger m-3" onclick="return confirm(`Tu veux vraiment supprimer cette punch bien fatch?`)">Supprimer</a>
+            <a href="{{ path('punchs_delete', {'id': punch.id}) }}" class="btn btn-danger m-1 p-2 mb-2" onclick="return confirm(`Tu veux vraiment supprimer cette punch bien fatch?`)">Supprimer</a>
 
             {% endif %}
+
+            <div class="row col-2">
+            <small class="">{{punch.date|date("d/m/Y")}}</small>
+            </div>
         </div>
 
         {% if punch.comments|length > 0 %}
-            <h2 class="mb-3">Commentaire des punchlinerz :</h2>
 
-            <div class="alert alert-info">
-              <h4 class="alert-heading">
-              <div class="row col-12 align-items-center">
+            <div class="global-mark col-10 p-4">
+              <div class="alert-heading">
+              <div class="row col-8 align-items-center">
               <div class="col">
-                Note globale des punchlinerz 
+                <h5>Note globale : </h5>
               </div>
               <div class="col">
                 {% include 'partials/rating.html.twig' with {'rating': punch.avgRatings} %}
-                <br>
+                {# <br> #}
+              </div>
+            <div class="col">
                 <small>(Calculée sur {{punch.comments|length}} punchlinerz)</small>
+                </div>
               </div>
               </div>
-              </h4>
             </div>
 
+            <h2 class="m-4 text-white">Commentaires des punchlinerz :</h2>
             {% for comment in punch.comments %}
-                <div class=" col-10 bg-secondary rounded mb-3 py-3 px-3">
+                <div class=" col-10 comment-card mb-3 py-3 px-3">
                     <strong>{{comment.author.username|capitalize}}</strong> :
-                    <blockquote>
+                    <blockquote class="m-0 p-1">
                         {{comment.content|capitalize}}
                     </blockquote>
-                    <strong>Note de {{comment.author.username|capitalize}} :</strong>
+                    <strong>Note :</strong>
                     {% include 'partials/rating.html.twig' with {'rating': comment.rating} %}
                 </div>
             {% endfor %}
         {% else %}
-            <h2>Cette punch n'a pas encore été commenté...</h2>
+            <h2 class="my-5">Cette punch n'a pas encore été commentée mskina...</h2>
+        {% endif %}
+    {% if is_granted('ROLE_USER') %}
+    <div class="mark-card col-10 p-4">
+            {% set comment = punch.commentFromAuthor(app.user) %}
+            {% if comment is not null %}
+            <h2 class="alert-heading text-center">T'as déjà noté cette punch</h2>
+                <blockquote>
+                    {{comment.content}}
+                </blockquote>
+                <strong>Note: </strong> {% include 'partials/rating.html.twig' with {'rating': comment.rating} %}
+            {% else %}
+
+            <h2 class="alert-heading">Note cette punch sans vergogne:</h2>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+                <div class="text-center">
+                <button type="submit" class="btn btn-success">Valider</button>
+                </div>
+            {{ form_end(form) }}
+
+            {% endif %}
         {% endif %}
     </div>
-
-    <div class="row col-12 text-center justify-content-center">
-        {% set p = punch.author %}
-        <div class="col-8 bg-secondary border m-2 text-white">
-
-    <div class="img">
-        <a href="{{ path('user_show', {'id': p.id})}}">
-            <img src="{{p.picture}}" class="avatar avatar-medium m-3" alt="Avatar de la personne">
-        </a>
     </div>
-        <a href="{{ path('user_show', {'id': p.id})}}">
-            <h3>{{p.username | capitalize}}</h3>
-        </a>
-            <span class=""> Nombre de punchs: {{p.punches | length}}</span>
-            <p>Description: {{p.description}}</p>
-        </div>
-</div>
+
+
 
 {% endblock %} 

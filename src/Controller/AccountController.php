@@ -57,13 +57,15 @@ class AccountController extends AbstractController
     public function register(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHasher){
         
         $user = new User();
+        
         $form = $this->createForm(RegistrationType::class, $user);
-
+        
         $form->handleRequest($request);
-
+        
         if($form->isSubmitted() && $form->isValid()){
-
+            
             $user->setRoles([]);
+
             $password = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
             $picture="https://picsum.photos/80";
@@ -171,7 +173,6 @@ class AccountController extends AbstractController
             }else{
                 $newPassword = $passwordUpdate->getNewPassword();
                 $password = $passwordHasher->hashPassword($user, $newPassword);
-
                 $user->setPassword($password);
                 $manager->persist($user);
                 $manager->flush();

@@ -2,14 +2,18 @@
 
 {% block title %}Modification du profil utilisateur{% endblock %}
 
+{% block stylesheets %}
+        <link rel="stylesheet" href="/css/profile_edit.css">
+{% endblock %}
+
 {% block body %}
 
-<div class="container col-8 border rounded bg-primary p-4 mt-5">
+<div class="container col-8 p-4 mt-5">
     <h1 class="text-center pb-3 m-4 text-white" >Modifier mon profil</h1>
 
     <div class=" form mb-5 align-items-center ">
     {{ form_start(form) }}
-    <div class="form-group col-10 mx-auto text-dark border rounded bg-light p-4">
+    <div class="form-group profile-edit-form col-10 mx-auto text-dark bg-dark p-5">
     {{ form_widget(form) }}
     
     <div class="row justify-content-center">
