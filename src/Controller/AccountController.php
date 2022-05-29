@@ -65,7 +65,6 @@ class AccountController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             
             $user->setRoles([]);
-
             $password = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
             $picture="https://picsum.photos/80";

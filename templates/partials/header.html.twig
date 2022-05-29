@@ -46,10 +46,10 @@
 </nav>
 
 {% for label, messages in app.flashes %}
-    <div class="container m-3">
-        <div class="alert alert-{{ label }}">
+    <div class="container mx-auto mt-3">
+        <div class="alert alert-{{ label }} text-center">
             {% for message in messages %}
-                <p>{{message}}</p>
+                <strong class="">{{message}}</strong>
             {% endfor %}
         </div>
     </div>

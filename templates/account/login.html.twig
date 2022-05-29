@@ -2,15 +2,19 @@
 
 {% block title %}Connexion au site{% endblock %}
 
+{% block stylesheets %}
+        <link rel="stylesheet" href="/css/login.css">
+{% endblock %}
+
 {% block body %}
 
 
-<div class="container bg-dark mx-auto m-5 p-5">
+<div class="container mx-auto m-5 p-5">
     <div class="row col-12 justify-content-center">
         {# <div class="col-md-3">&nbsp;</div> #}
         <div class="col-md-8">
-            <div class="col-12 bg-light p-3 border rounded">
-                <h1 class="text-success m-4 pb-3 text-center">Connectez-vous!</h1>
+            <div class="col-12 login-form p-5">
+                <h1 class="text-white m-4 pb-3 text-center">Connectez-vous!</h1>
 
                 {% if hasError %}
                     <div class="alert alert-danger">Tu fais pas d'efforts, renseigne des infos valides</div>

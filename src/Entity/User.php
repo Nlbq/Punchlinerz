@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\Collection;
+// use Doctrine\DBAL\Schema\Constraint;
+// use Symfony\Component\Validator\Constraints\EqualTo;
+// use Symfony\Component\Validator\Constraints\NotBlank;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\DBAL\Schema\Constraint;
-use Symfony\Component\Validator\Constraints\EqualTo;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -55,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Punch::class, mappedBy="author")
-     * 
+     * @ORM\JoinColumn(nullable=true)
      */
     private $punches;
 
@@ -74,9 +75,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $comments;
 
+
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->punches = new ArrayCollection();
+
     }
 
    
