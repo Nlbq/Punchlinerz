@@ -1,0 +1,33 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modification de l'utilisateur numéro {{user.id}} {% endblock %}
+
+{% block body %}
+<div class="container col-md-10">
+  <h2 class="text-center mt-3">Modification de l'utilisateur {{user.username}}</h2>
+
+
+
+  {{  form_start(form) }}
+
+  <div class="row">
+    <div class="col">
+      <div class="card bg-dark p-3 mt-5">
+        <div class="card-header">
+          <h4 class="card-title text-center m-0">Modifier l'utilisateur</h4>
+        </div >
+        <div class="card-body">
+          {{  form_widget(form) }}
+        </div>
+          <button type="submit" class="btn btn-success col-3 mx-auto my-2">
+            Valider
+          </button>
+        </div>
+      </div>
+  </div>
+</div>
+
+  {{  form_end(form) }}
+
+</div>
+{% endblock %}
