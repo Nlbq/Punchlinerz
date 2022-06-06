@@ -15,15 +15,23 @@
 
 .card-header{
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .card-footer{
   font-size: 16px;
 }
 
+.card-footer a{
+  font-size: 14px;
+}
+
 .card-header,
 .card-footer
 {
   background: #272727;
+}
+
+.punch-content{
+  /* font-size: 16px; */
 }

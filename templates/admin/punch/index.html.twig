@@ -1,0 +1,49 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block stylesheets %}
+        <link rel="stylesheet" href="/css/admin/admin_index.css">
+{% endblock %}
+
+{% block title %}Administration des punchs{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h2 class="text-center my-5">Gestion des punchs</h2>
+
+    <table class="table table-hover text-center">
+        <thead>
+            <tr>
+              <th class="col-1">Id</th>
+              <th class="col-1">Theme</th>
+              <th class="col-5">Contenu</th>
+              <th class="col-1">Date</th>
+              <th class="col-1">Auteur</th>
+              <th class="col-1">Note</th>
+              <th class="col-2">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+          {% for punch in punchs %}
+          <tr>
+            <td class="align-middle">{{punch.id}}</td>
+            <td class="align-middle">{{punch.theme}}</td>
+            <td class="align-middle">{{punch.content}}</td>
+            <td class="align-middle">{{punch.date|date("d/m/Y")}}</td>
+            <td class="align-middle">
+              <img src="{{punch.author.picture}}" alt="Avatar de {{punch.author.username}}" class="avatar avatar-micro me-2">
+              {{punch.author.username|capitalize}}
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-secondary">{{punch.avgRatings}}</span>
+            </td>
+            <td>
+              <a href="{{ path('admin_punchs_edit', {'id': punch.id}) }}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square "></i></i></a>
+              <a href="{{ path('admin_punchs_delete', {'id': punch.id}) }}" class="btn btn-danger mx-2"><i class="bi bi-trash "></i></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

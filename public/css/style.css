@@ -19,6 +19,10 @@ body{
     max-width: 24px;
     max-height: 24px;
 }
+.avatar-micro{
+    max-width: 22px;
+    max-height: 22px;
+}
 .navbar .dropdown-menu-right { 
     right: 0; 
     left: auto; 

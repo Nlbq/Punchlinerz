@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modification du commentaire numéro {{comment.id}} {% endblock %}
+
+{% block body %}
+<div class="container col-md-10">
+  <h2 class="text-center mt-3">Modification du commentaire de {{comment.author.username}}</h2>
+
+  <div class="alert alert-warning">
+  <strong>Punch liée : </strong> {{comment.punch.content}}<br>
+  <strong>Auteur: </strong> {{comment.author.username}}<br>
+  <strong>Date de création: </strong> {{comment.createdAt|date("d/m/Y")}}<br>
+
+  </div>
+
+  {{  form_start(form) }}
+
+  <div class="row">
+    <div class="col">
+      <div class="card bg-dark p-3 mt-5">
+        <div class="card-header">
+          <h4 class="card-title text-center m-0">Corriger le commentaire</h4>
+        </div >
+        <div class="card-body">
+          {{  form_widget(form) }}
+        </div>
+          <button type="submit" class="btn btn-success col-3 mx-auto my-2">
+            Valider
+          </button>
+        </div>
+      </div>
+  </div>
+</div>
+
+  {{  form_end(form) }}
+
+</div>
+{% endblock %}

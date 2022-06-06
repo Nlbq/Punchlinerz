@@ -7,27 +7,31 @@
 <a href="{{ url }}" style="text-decoration: none;">
 
     <div class="card disabled col-md-8 p-0 text-center m-2 punch-cards">
-        <div class="card-header d-flex text-success px-4">
+        <div class="card-header d-flex text-success px-4 py-1">
             <p class="mb-0">{{punch.theme|capitalize}}</p>
             <p class="ms-auto mb-0">{{punch.author.username|capitalize}}</p>
         </div>
         <div class="card-body p-1">
 
-            <h5 class="card-text p-2 text-white">{{punch.content|capitalize}}</h5>
-            <a href="{{ url }}" class=" btn btn-secondary m-1 py-0 p-2 text-white bg-success">Afficher</a>
-            {% if app.user and app.user == punch.author %}
-            <a href="{{ path('punchs_edit', {'id': punch.id}) }}" class="btn btn-secondary bg-warning m-1 py-0 p-2">Modifier</a>
-            {% endif %}
+            <h5 class="card-text p-2 px-4 text-white punch-content">{{punch.content|capitalize}}</h5>
+            
         </div>
-        <div class="card-footer d-flex px-4">
+        <div class="card-footer d-flex px-4 py-1">
             <small class="text-success">{{punch.date|date("d/m/Y")}}</small>
 
+            <div class="mx-auto">
+                <a href="{{ url }}" class=" btn btn-secondary m-0 py-0 p-2 text-white bg-success mx-1">Afficher</a>
+                {% if app.user and app.user == punch.author %}
+                <a href="{{ path('punchs_edit', {'id': punch.id}) }}" class="btn btn-secondary bg-warning m-0 py-0 p-2 mx-1">Modifier</a>
+                {% endif %}
+            </div>
+
             {% if punch.comments|length > 0 %}
-                <div class="ms-auto">
+                <div class="">
                 {% include 'partials/rating.html.twig' with {'rating': punch.avgRatings} %}
                 </div>
             {% else %}
-                <small class="ms-auto  text-warning">Pas encore noté</small>
+                <small class="text-warning">Pas encore noté</small>
             {% endif %}
 
 
