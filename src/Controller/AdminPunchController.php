@@ -14,12 +14,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminPunchController extends AbstractController
 {
     /**
-     * @Route("/admin/punchs", name="admin_punchs_index")
+     * @Route("/admin/punchs/{page<\d+>?1}", name="admin_punchs_index")
      */
-    public function index(PunchRepository $repo): Response
+    public function index(PunchRepository $repo, $page): Response
     {
+        $limit = 10;
+        $start = $page * $limit - $limit;
+        $total = count($repo->findAll());
+        $pages = ceil($total / $limit);
+
         return $this->render('admin/punch/index.html.twig', [
-            'punchs' => $repo->findAll()
+            'punchs' => $repo->findBy([], [], $limit, $start),
+            'pages' => $pages,
+            'page' => $page
         ]);
     }
 
